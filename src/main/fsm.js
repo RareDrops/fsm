@@ -1,37 +1,43 @@
 function convertLatexShortcuts(text) {
+	// Add more latex shortcuts here if needed
 	// Greek letters
 	const greekLetters = {
-		'\\alpha': 'α', '\\beta': 'β', '\\gamma': 'γ', '\\delta': 'δ', '\\epsilon': 'ε',
-		'\\zeta': 'ζ', '\\eta': 'η', '\\theta': 'θ', '\\iota': 'ι', '\\kappa': 'κ',
-		'\\lambda': 'λ', '\\mu': 'μ', '\\nu': 'ν', '\\xi': 'ξ', '\\pi': 'π',
-		'\\rho': 'ρ', '\\sigma': 'σ', '\\tau': 'τ', '\\upsilon': 'υ', '\\phi': 'φ',
-		'\\chi': 'χ', '\\psi': 'ψ', '\\omega': 'ω',
-		'\\Gamma': 'Γ', '\\Delta': 'Δ', '\\Theta': 'Θ', '\\Lambda': 'Λ', '\\Xi': 'Ξ',
-		'\\Pi': 'Π', '\\Sigma': 'Σ', '\\Phi': 'Φ', '\\Psi': 'Ψ', '\\Omega': 'Ω'
+		'\\alpha': '\u03B1', '\\beta': '\u03B2', '\\gamma': '\u03B3', '\\delta': '\u03B4', '\\epsilon': '\u03B5',
+		'\\zeta': '\u03B6', '\\eta': '\u03B7', '\\theta': '\u03B8', '\\iota': '\u03B9', '\\kappa': '\u03BA',
+		'\\lambda': '\u03BB', '\\mu': '\u03BC', '\\nu': '\u03BD', '\\xi': '\u03BE', '\\pi': '\u03C0',
+		'\\rho': '\u03C1', '\\sigma': '\u03C3', '\\tau': '\u03C4', '\\upsilon': '\u03C5', '\\phi': '\u03C6',
+		'\\chi': '\u03C7', '\\psi': '\u03C8', '\\omega': '\u03C9',
+		'\\Gamma': '\u0393', '\\Delta': '\u0394', '\\Theta': '\u0398', '\\Lambda': '\u039B', '\\Xi': '\u039E',
+		'\\Pi': '\u03A0', '\\Sigma': '\u03A3', '\\Phi': '\u03A6', '\\Psi': '\u03A8', '\\Omega': '\u03A9'
 	};
 
-	// Basic mathematical operators
+	// Mathematical operators
 	const operators = {
-		'\\times': '×', '\\div': '÷', '\\pm': '±', '\\mp': '∓',
-		'\\leq': '≤', '\\geq': '≥', '\\neq': '≠', '\\approx': '≈',
-		'\\infty': '∞', '\\sum': '∑', '\\prod': '∏', '\\int': '∫',
+		'\\times': '\u00D7', '\\div': '\u00F7', '\\pm': '\u00B1', '\\mp': '\u2213',
+		'\\leq': '\u2264', '\\geq': '\u2265', '\\neq': '\u2260', '\\approx': '\u2248',
+		'\\infty': '\u221E', '\\sum': '\u2211', '\\prod': '\u220F', '\\int': '\u222B',
 		// Set theory symbols
-		'\\cup': '∪', '\\cap': '∩', '\\subset': '⊂', '\\supset': '⊃',
-		'\\subseteq': '⊆', '\\supseteq': '⊇', '\\in': '∈', '\\notin': '∉',
-		'\\emptyset': '∅', '\\varnothing': '∅',
+		'\\cup': '\u222A', '\\cap': '\u2229', '\\subset': '\u2282', '\\supset': '\u2283',
+		'\\subseteq': '\u2286', '\\supseteq': '\u2287', '\\in': '\u2208', '\\notin': '\u2209',
+		'\\emptyset': '\u2205', '\\varnothing': '\u2205',
 		// Additional operators
-		'\\cdot': '·', '\\bullet': '•', '\\circ': '∘', '\\oplus': '⊕',
-		'\\otimes': '⊗', '\\setminus': '∖', '\\subsetneq': '⊊', '\\supsetneq': '⊋'
+		'\\cdot': '\u22C5', '\\bullet': '\u2022', '\\circ': '\u2218', '\\oplus': '\u2295',
+		'\\otimes': '\u2297', '\\setminus': '\u2216', '\\subsetneq': '\u228A', '\\supsetneq': '\u228B'
 	};
 
 	// Replace Greek letters
 	for (const [latex, unicode] of Object.entries(greekLetters)) {
-		text = text.replace(new RegExp(latex, 'g'), unicode);
+		text = text.replace(new RegExp('\\'+latex, 'g'), unicode);
 	}
 
 	// Replace operators
 	for (const [latex, unicode] of Object.entries(operators)) {
-		text = text.replace(new RegExp(latex, 'g'), unicode);
+		text = text.replace(new RegExp('\\'+latex, 'g'), unicode);
+	}
+
+	// subscripts
+	for(var i = 0; i < 10; i++) {
+		text = text.replace(new RegExp('_' + i, 'g'), String.fromCharCode(8320 + i));
 	}
 
 	return text;
