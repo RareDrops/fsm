@@ -4,7 +4,7 @@
 
 **Original Website**: [http://madebyevan.com/fsm/](http://madebyevan.com/fsm/)
 
-**Updated Website**: [https://raredrops.github.io/fsm](https://raredrops.github.io/fsm)
+**Updated Website**: [https://raredrops.github.io/fsm](https://raredrops.github.io/fsm/)
 
 ## Description
 
