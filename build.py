@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 import os, time, sys
 
@@ -8,10 +9,18 @@ def sources():
 
 def build():
 	path = './www/fsm.js'
-	data = '\n'.join(open(file, 'r').read() for file in sources())
-	with open(path, 'w') as f:
-		f.write(data)
-	print 'built %s (%u bytes)' % (path, len(data))
+	try:
+		data = '\n'.join(open(file, 'r', encoding='utf-8').read() for file in sources())
+		with open(path, 'w', encoding='utf-8') as f:
+			f.write(data)
+		print('built %s (%u bytes)' % (path, len(data)))
+	except Exception as e:
+		print('Error:', str(e))
+		# Try alternative encoding if utf-8 fails
+		data = '\n'.join(open(file, 'r', encoding='latin-1').read() for file in sources())
+		with open(path, 'w', encoding='utf-8') as f:
+			f.write(data)
+		print('built %s (%u bytes) using latin-1 fallback' % (path, len(data)))
 
 def stat():
 	return [os.stat(file).st_mtime for file in sources()]
