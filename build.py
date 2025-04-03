@@ -8,7 +8,7 @@ def sources():
 	return [os.path.join(base, f) for base, folders, files in os.walk(path) for f in files if f.endswith('.js')]
 
 def build():
-	path = './www/fsm.js'
+	path = './public/fsm.js'
 	try:
 		data = '\n'.join(open(file, 'r', encoding='utf-8').read() for file in sources())
 		with open(path, 'w', encoding='utf-8') as f:
