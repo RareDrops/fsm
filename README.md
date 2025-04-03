@@ -1,5 +1,7 @@
 # Finite State Machine Designer
 
+![Finite State Machine Image](./.github/images/image.png)
+
 **Original Website**: [http://madebyevan.com/fsm/](http://madebyevan.com/fsm/)
 
 **Updated Website**: [https://raredrops.github.io/fsm](https://raredrops.github.io/fsm)
