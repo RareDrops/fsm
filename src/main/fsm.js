@@ -1,16 +1,37 @@
-var greekLetterNames = [ 'Alpha', 'Beta', 'Gamma', 'Delta', 'Epsilon', 'Zeta', 'Eta', 'Theta', 'Iota', 'Kappa', 'Lambda', 'Mu', 'Nu', 'Xi', 'Omicron', 'Pi', 'Rho', 'Sigma', 'Tau', 'Upsilon', 'Phi', 'Chi', 'Psi', 'Omega' ];
-
 function convertLatexShortcuts(text) {
-	// html greek characters
-	for(var i = 0; i < greekLetterNames.length; i++) {
-		var name = greekLetterNames[i];
-		text = text.replace(new RegExp('\\\\' + name, 'g'), String.fromCharCode(913 + i + (i > 16)));
-		text = text.replace(new RegExp('\\\\' + name.toLowerCase(), 'g'), String.fromCharCode(945 + i + (i > 16)));
+	// Greek letters
+	const greekLetters = {
+		'\\alpha': 'α', '\\beta': 'β', '\\gamma': 'γ', '\\delta': 'δ', '\\epsilon': 'ε',
+		'\\zeta': 'ζ', '\\eta': 'η', '\\theta': 'θ', '\\iota': 'ι', '\\kappa': 'κ',
+		'\\lambda': 'λ', '\\mu': 'μ', '\\nu': 'ν', '\\xi': 'ξ', '\\pi': 'π',
+		'\\rho': 'ρ', '\\sigma': 'σ', '\\tau': 'τ', '\\upsilon': 'υ', '\\phi': 'φ',
+		'\\chi': 'χ', '\\psi': 'ψ', '\\omega': 'ω',
+		'\\Gamma': 'Γ', '\\Delta': 'Δ', '\\Theta': 'Θ', '\\Lambda': 'Λ', '\\Xi': 'Ξ',
+		'\\Pi': 'Π', '\\Sigma': 'Σ', '\\Phi': 'Φ', '\\Psi': 'Ψ', '\\Omega': 'Ω'
+	};
+
+	// Basic mathematical operators
+	const operators = {
+		'\\times': '×', '\\div': '÷', '\\pm': '±', '\\mp': '∓',
+		'\\leq': '≤', '\\geq': '≥', '\\neq': '≠', '\\approx': '≈',
+		'\\infty': '∞', '\\sum': '∑', '\\prod': '∏', '\\int': '∫',
+		// Set theory symbols
+		'\\cup': '∪', '\\cap': '∩', '\\subset': '⊂', '\\supset': '⊃',
+		'\\subseteq': '⊆', '\\supseteq': '⊇', '\\in': '∈', '\\notin': '∉',
+		'\\emptyset': '∅', '\\varnothing': '∅',
+		// Additional operators
+		'\\cdot': '·', '\\bullet': '•', '\\circ': '∘', '\\oplus': '⊕',
+		'\\otimes': '⊗', '\\setminus': '∖', '\\subsetneq': '⊊', '\\supsetneq': '⊋'
+	};
+
+	// Replace Greek letters
+	for (const [latex, unicode] of Object.entries(greekLetters)) {
+		text = text.replace(new RegExp(latex, 'g'), unicode);
 	}
 
-	// subscripts
-	for(var i = 0; i < 10; i++) {
-		text = text.replace(new RegExp('_' + i, 'g'), String.fromCharCode(8320 + i));
+	// Replace operators
+	for (const [latex, unicode] of Object.entries(operators)) {
+		text = text.replace(new RegExp(latex, 'g'), unicode);
 	}
 
 	return text;
